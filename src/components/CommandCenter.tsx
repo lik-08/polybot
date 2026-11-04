@@ -1,9 +1,23 @@
 'use client';
 import {useState} from 'react';
 import HolographicScene from '@/components/HolographicScene';
-import PortfolioRoom from '@/components/PortfolioRoom';
+import PortfolioHub from '@/components/PortfolioHub';
 const modules=['Command Deck','Stock Intel','Portfolio','BTC Terminal','Home Control'];
 export default function CommandCenter(){
- const [module,setModule]=useState(0);const [entered,setEntered]=useState(false);const [lowGraphics,setLowGraphics]=useState(false);
- return <main className="command-center"><aside className="sidebar"><div className="brand">POLYBOT <small>HOLOGRAPHIC COMMAND CENTER</small></div><nav aria-label="Command modules">{modules.map((m,i)=><button key={m} className={module===i?'active':''} onClick={()=>{setModule(i);setEntered(i===2)}}><span className="symbol">{['◈','◉','▤','⌁','◇'][i]}</span>{m}</button>)}</nav><div className="side-note">Your future research, BTC and home modules remain planned entry points; only the portfolio room is interactive in this starter.</div></aside><section className="workspace"><header className="workspace-top"><div><div className="eyebrow">PERSONAL INTELLIGENCE SYSTEM / BUILD 0.1</div><h1>{entered?'Portfolio Analysis':'Your universe. One command center.'}</h1></div><span className="demo-tag">RESEARCH STARTER · DEMO ONLY</span></header>{entered?<PortfolioRoom onExit={()=>{setEntered(false);setModule(0)}}/>:<><section className="hero"><div className="eyebrow">3D CITY / SELECT A BUILDING</div>{!lowGraphics&&<HolographicScene onEnter={()=>{setEntered(true);setModule(2)}}/>}{lowGraphics&&<div className="low-detail">Low-graphics mode enabled. Open the portfolio room from the button below.</div>}<div className="hero-controls"><button className="primary" onClick={()=>{setEntered(true);setModule(2)}}>Enter portfolio room</button><button className="secondary" onClick={()=>setLowGraphics(s=>!s)}>{lowGraphics?'Enable 3D city':'Low-graphics mode'}</button></div></section><div className="tiles"><div><span>01</span><strong>Holographic navigation</strong><p>3D city and rotating future modules</p></div><div><span>02</span><strong>Portfolio intelligence</strong><p>Timeframes, crosshair and attribution</p></div><div><span>03</span><strong>Secure live connections</strong><p>Not connected; no real account data</p></div></div></>}</section></main>
+ const [module,setModule]=useState(0),[entered,setEntered]=useState(false),[lowGraphics,setLowGraphics]=useState(false);
+ const enter=()=>{setEntered(true);setModule(2)};
+ return <main className="command-center">
+  <aside className="sidebar"><div className="brand">POLYBOT <small>HOLOGRAPHIC COMMAND CENTER</small></div>
+   <nav aria-label="Command modules">{modules.map((name,index)=><button key={name} className={module===index?'active':''} aria-current={module===index?'page':undefined} onClick={()=>{setModule(index);setEntered(index===2)}}><span className="symbol">{['◈','◉','▤','⌁','◇'][index]}</span>{name}</button>)}</nav>
+   <div className="side-note">Private manual portfolio records and a separate synthetic demo. Research, BTC and home integrations remain planned. Trading is disabled.</div>
+  </aside>
+  <section className="workspace"><header className="workspace-top"><div><div className="eyebrow">PERSONAL INTELLIGENCE SYSTEM / LOCAL WORKSPACE</div><h1>{entered?'Portfolio Analysis':'Your universe. One command center.'}</h1></div><span className="demo-tag">LOCAL WORKSPACE · LIVE FEED OFF</span></header>
+   <div hidden={!entered}><PortfolioHub onExit={()=>{setEntered(false);setModule(0)}}/></div>
+   {!entered&&<><section className="hero"><div className="eyebrow">3D CITY / SELECT A BUILDING</div>
+    {module!==0&&<p className="module-notice">{modules[module]} is a planned integration. No account or live feed is connected. Explore the city or open your portfolio.</p>}
+    {!lowGraphics?<HolographicScene onEnter={enter}/>:<div className="low-detail">Low-graphics mode enabled. Open the portfolio room from the button below.</div>}
+    <div className="hero-controls"><button className="primary" onClick={enter}>Enter portfolio room</button><button className="secondary" onClick={()=>setLowGraphics(value=>!value)}>{lowGraphics?'Enable 3D city':'Low-graphics mode'}</button></div>
+   </section><div className="tiles"><div><span>01</span><strong>Holographic navigation</strong><p>3D city and immersive portfolio surfaces</p></div><div><span>02</span><strong>Private portfolio ledger</strong><p>Exact shares, cash events and dated manual prices</p></div><div><span>03</span><strong>Explicit data provenance</strong><p>Manual records and synthetic demo stay separate</p></div></div></>}
+  </section>
+ </main>;
 }

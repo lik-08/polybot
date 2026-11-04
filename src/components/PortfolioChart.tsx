@@ -2,8 +2,9 @@
 import {useEffect,useMemo,useRef,useState} from 'react';
 import {AreaSeries, ColorType, CrosshairMode, createChart, type UTCTimestamp} from 'lightweight-charts';
 import {demoSeries,dollars,type Range} from '@/lib/demo';
-export default function PortfolioChart({range,onPick}:{range:Range,onPick:(index:number)=>void}){
+export default function PortfolioChart({range,selectedIndex,onPick}:{range:Range,selectedIndex:number,onPick:(index:number)=>void}){
  const holder=useRef<HTMLDivElement>(null);
+ const moveCrosshair=useRef<((index:number)=>void)|null>(null);
  const [hovered,setHovered]=useState<number|null>(null);
  const points=useMemo(()=>demoSeries(range),[range]);
  useEffect(()=>{
@@ -26,7 +27,8 @@ export default function PortfolioChart({range,onPick}:{range:Range,onPick:(index
    }
   };
   chart.subscribeCrosshairMove(handler);
-  return()=>{chart.unsubscribeCrosshairMove(handler);chart.remove()};
+  moveCrosshair.current=index=>{const point=points[index];if(point)chart.setCrosshairPosition(point.value,point.time as UTCTimestamp,series)};
+  return()=>{moveCrosshair.current=null;chart.unsubscribeCrosshairMove(handler);chart.remove()};
    },[range,points,onPick]);
- return <div className="chart-shell"><div ref={holder} className="price-chart" aria-label={`Simulated portfolio chart for ${range}`}/><div className="chart-foot">{hovered===null?'Hover, touch, or drag the graph to inspect a time':'Selected '+dollars(points[hovered]?.value??points[points.length-1].value)}</div><label className="keyboard-label" htmlFor="portfolio-scrubber">Keyboard/touch precise scrub</label><input id="portfolio-scrubber" type="range" min={0} max={points.length-1} defaultValue={points.length-1} key={range} onChange={e=>{const i=Number(e.target.value);setHovered(i);onPick(i)}}/></div>
+ return <div className="chart-shell"><div ref={holder} className="price-chart" aria-label={`Simulated portfolio chart for ${range}`}/><div className="chart-foot">{hovered===null?'Hover, touch, or drag the graph to inspect a time':'Selected '+dollars(points[selectedIndex].value)}</div><label className="keyboard-label" htmlFor="portfolio-scrubber">Keyboard/touch precise scrub</label><input id="portfolio-scrubber" type="range" min={0} max={points.length-1} value={selectedIndex} aria-valuetext={dollars(points[selectedIndex].value)} onChange={e=>{const i=Number(e.target.value);setHovered(i);onPick(i);moveCrosshair.current?.(i)}}/></div>
 }

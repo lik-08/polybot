@@ -18,7 +18,7 @@
     "@react-three/fiber": "^9.0.0",
     "@react-three/drei": "^10.0.0",
     "lightweight-charts": "^5.0.0",
-    "lucide-react": "^0.450.0"
+    "lucide-react": "0.451.0"
   },
   "devDependencies": {
     "typescript": "^5.0.0",
@@ -28,6 +28,11 @@
     "@types/three": "^0.180.0",
     "eslint": "^9.0.0",
     "eslint-config-next": "^16.0.0"
+  },
+  "overrides": {
+    "@typescript-eslint/typescript-estree": {
+      "minimatch": "11.0.1"
+    }
   },
   "engines": { "node": ">=20.9.0" }
 }

@@ -7,4 +7,7 @@ dist/
 !.env.example
 .vercel/
 *.log
+*.tsbuildinfo
+polybot-private-ledger*.json
+private-data/
 .DS_Store

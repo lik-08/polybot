@@ -1,6 +1,6 @@
 # POLYBOT — Canonical Master Project Blueprint
-**Version:** 5.0 · November 4, 2026  
-**Status:** 3D-first portfolio prototype plus preparatory Next.js + React Three Fiber starter; 8 accounting checks pass. NOT yet an authenticated, broker-synced, live-market app. Supabase and Vercel project creation remain pending.  
+**Version:** 5.1 · November 4, 2026
+**Status:** 3D-first local Next.js workspace, private manual event ledger, reviewed import/export, dated manual valuations, and separate synthetic chart demo. NOT an authenticated, broker-synced, live-market app. Supabase and Vercel project creation remain pending. Current verification is in `../PROJECT_STATUS.md`.
 **Canonical specification:** This file (`POLYBOT_MASTER_BLUEPRINT.md`) is the single point of reference for future feature additions. GitHub repository was verified as `lik-08/polybot` (connected, public, empty at start of v5); it is the intended single source of truth. Keep private finance data out of it.
 
 ## 1. Product purpose and build principle
@@ -110,6 +110,8 @@ A 5Y control is a **feature**, not a claim that five years of the owner's record
 Node.js LTS • Next.js + React/TypeScript • Three.js/React Three Fiber/Drei • GSAP • Tailwind CSS • TradingView Lightweight Charts (or equivalent precise interactive plotting surface) • Supabase • GitHub • Vercel • licensed market-data provider (to choose after research). No requirement for Java programming.
 
 ## 10. Changelog
+- **2026-11-04 v5.1:** Added a private local USD event ledger with exact fractional shares, deposits/withdrawals/trades/dividends/fees/splits, average-cost results, and missing-price-aware historical replay. Added manual forms, reviewed import/export, opt-in device storage with cross-tab conflict protection, preserved city/demo navigation, import documentation and a non-deploying CI workflow. Corrected accounting validation/ETF reconciliation/overflow, synchronized chart mouse/keyboard selection, removed remote scene-font loading and protected 3D failures. Full dependency audit cleared via targeted patched minimatch override. Integration gates document missing owner data and live/cloud prerequisites.
+- **2026-11-04 local validation:** Installed and locked dependencies; corrected unavailable icon dependency and city building height prop. Preserved 3D visuals while respecting reduced motion, resetting chart hover on range changes, showing second-level short-range timestamps, and constraining mobile grid width. No cloud, personal-account, live-data or trading integration was activated. Local verification evidence is recorded in `../PROJECT_STATUS.md`.
 - **2026-10-29–2026-11-01:** Original POLYBOT interactive snapshot with five modules and 20-holding explorer, rotating holographic selector and planned holographic city/room environment.
 - **2026-11-04 v3:** Codified 3D-first direction, chart crosshair, ranges, movement attribution, ETF diversification/overlap and Next.js/Three.js architecture.
 - **2026-11-04 v4:** Expanded to minute/hour/day/week/month/quarter/year/five-year/all timeframes; always-visible daily and monthly P&L; exact separate withdrawals, deposits, sale proceeds, dividends, realized and unrealized gains; sector-versus-group rankings; live number behavior/freshness; historical availability, data architecture, owner/developer task inventory, testable acceptance criteria and future commercialization safeguards. Updated interactive **simulated** HTML prototype accordingly.
