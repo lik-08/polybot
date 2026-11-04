@@ -1,0 +1,10 @@
+import test from 'node:test';import assert from 'node:assert/strict';
+import {accountValue,externalFlowAdjustedGain,positionPriceContribution,classifyCashEvent,distributeEtfExposure} from '../src/lib/accounting.mjs';
+test('deposit increases account value but not profit',()=>assert.equal(externalFlowAdjustedGain({start:1000,end:1100,deposits:100,withdrawals:0}),0));
+test('withdrawal does not count as market loss',()=>assert.equal(externalFlowAdjustedGain({start:1000,end:970,deposits:0,withdrawals:30}),0));
+test('sale proceeds are not external cash withdrawal',()=>assert.deepEqual(classifyCashEvent('sale',50),{external:0,saleProceeds:50}));
+test('dividend stays within investment result rather than deposit',()=>{assert.deepEqual(classifyCashEvent('dividend',8),{external:0,saleProceeds:0});assert.equal(externalFlowAdjustedGain({start:1000,end:1008,deposits:0,withdrawals:0}),8)});
+test('fractional share value and cash',()=>assert.equal(accountValue([{quantity:.5,price:200},{quantity:1.25,price:80}],15),215));
+test('direct price contribution',()=>assert.equal(positionPriceContribution(.5,200,210),5));
+test('ETF sectors plus unclassified equal ETF value',()=>{const x=distributeEtfExposure(200,{technology:.3,financials:.15});assert.ok(Math.abs(Object.values(x).reduce((s,v)=>s+v,0)-200)<1e-8);assert.ok(Math.abs(x.unclassified-110)<1e-8)});
+test('bad values fail closed',()=>assert.throws(()=>accountValue([{quantity:-1,price:100}],0)));

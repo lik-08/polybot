@@ -12,6 +12,7 @@ The existing `polybot-portfolio-command-center-v2.html` and V4 `POLYBOT_holograp
 ```powershell
 git clone https://github.com/lik-08/polybot.git
 cd polybot
+git switch feature/3d-portfolio-v5-research
 node -v
 npm install
 npm test
@@ -59,3 +60,8 @@ In production, the user's portfolio shall distinguish value change vs external d
 7. Owner daily usage; only after sufficient testing assess commercial multi-user setup and data licenses.
 
 See [docs/RESEARCH_AND_SETUP.md](docs/RESEARCH_AND_SETUP.md) for evidence, app/plugin settings, responsibilities and fast computer-use vs manual workflow.
+
+### Current feature-branch scope
+Until this starter is merged into `main`, use `git switch feature/3d-portfolio-v5-research` after cloning. This branch is for review/testing and is **not a production launch**.
+
+The minute-range synthetic chart deliberately uses 61 unique integer-second samples for 1m; other ranges use 101 points. Real quote feeds must never fabricate interpolation as actual trades.
