@@ -1,0 +1,14 @@
+node_modules/
+.next/
+out/
+dist/
+.env
+.env.*
+!.env.example
+.vercel/
+*.log
+*.tsbuildinfo
+polybot-private-ledger*.json
+polybot-private-opening*.json
+private-data/
+.DS_Store
