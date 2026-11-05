@@ -1,5 +1,12 @@
 # Local verification — November 4, 2026
 
+## Opening-snapshot continuation
+
+- Added strict opening-observation validation, exact reconciliation boundaries, unknown/null preservation, separate opening UI, reviewed local import/export and manual corrections. No complete ledger, cash, basis, purchase dates, gains or historical series are inferred from screenshots. The existing 3D/manual-ledger/demo modes are preserved and stay mounted for session retention.
+- Private screenshots were independently checked; the private import is stored outside the repository under HQ runtime. Obscured fields remain unknown. No private amounts, holdings lists, screenshots, or imports were embedded in source/tests/commits. Only synthetic fixtures are used in tests.
+- Current suite: **48 tests passed**, no skipped tests; lint and Next.js build/TypeScript/static generation passed. Includes opening validation, unknown cash, partial residual, share-class distinction, unsupported dollar precision, bounded imports and invalid calendars. Source review corrected pending import invalidation after manual corrections. A read-only OneDrive build cache caused a Windows unlink error; moving only generated cache to ignored HQ runtime allowed a clean successful build.
+- Build and browser completion evidence are recorded in the local HQ status/handoff. Remaining missing observations require owner confirmation; this feature does not turn incomplete screenshots into verified brokerage history.
+
 ## Current result — private local portfolio stage
 
 - Added an empty-by-default manual workspace alongside the preserved synthetic demo and 3D city. Supports exact fractional-share events, deposits/withdrawals, buy/sell fees, dividends and splits, weighted-average cost, separate gross sale proceeds/realized results, and dated price observations. No trades or brokerage connections occur.

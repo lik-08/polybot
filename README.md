@@ -34,6 +34,8 @@ The affected TypeScript lint dependency now uses a targeted `minimatch@11.0.1` o
 
 ## Private manual workspace
 
+The **Opening snapshot** mode now accepts observed holdings with unknown purchase history, cost basis, cash or date. Import/review a private opening JSON, confirm only supported values, and export a backup. Any unexplained balance difference stays unexplained; it never becomes inferred cash or investment profit. See [opening snapshot format](docs/OPENING_SNAPSHOTS.md). Personal screenshot data is kept outside this repository.
+
 - Record deposits, withdrawals, fractional-share buys/sells, dividends, fees and splits. Cash must cover every event; sales cannot exceed held shares. Sale proceeds remain separate from external withdrawals.
 - Weighted average cost includes purchase fees; realized gains deduct sale fees. This is an explicitly disclosed bookkeeping method, **not tax-lot accounting**.
 - Enter dated manual prices. Valuations replay only events through that instant. Missing held prices produce an unavailable total; earlier prices and present holdings never fill missing history.
