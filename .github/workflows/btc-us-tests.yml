@@ -1,0 +1,26 @@
+name: BTC US paper research tests
+
+on:
+  push:
+    branches: ["feat/polymarket-us-paper-research"]
+    paths:
+      - "btc-us/**"
+      - ".github/workflows/btc-us-tests.yml"
+  pull_request:
+    paths:
+      - "btc-us/**"
+      - ".github/workflows/btc-us-tests.yml"
+
+jobs:
+  unittest:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: btc-us
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Offline tests (no secrets or order access)
+        run: python -m unittest discover -s tests -v
